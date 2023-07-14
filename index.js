@@ -4,8 +4,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const basketRouter = require("./routes/basket.route");
+
 app.use(cors());
-// app.use(require("./routes/user.route"));
+app.use("/basket", basketRouter);
 
 mongoose
   .connect(process.env.MONGO_SERVER)
