@@ -6,10 +6,12 @@ const app = express();
 
 const basketRouter = require("./routes/basket.route");
 const favoriteRouter = require("./routes/favorite.route");
+const productRouter = require("./routes/product.route");
 
 app.use(cors());
 app.use("/basket", basketRouter);
 app.use("/favorite", favoriteRouter);
+app.use("/product", productRouter);
 
 mongoose
   .connect(process.env.MONGO_SERVER)
