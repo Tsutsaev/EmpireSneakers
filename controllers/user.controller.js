@@ -1,19 +1,19 @@
 const User = require('../models/User')
 
 module.exports.usersController = {
-    addUser:async(req,res) => {
+    createUser:async(req,res) => {
         try {
             const { name, email, login, password, admin } = req.body;
-            const addUser = await User.create({
+            const createUser = await User.create({
                 name,
                 email,
                 login,
                 password,
                 admin
             })
-            res.json(addUser)
+            res.json(createUser)
         } catch (error) {
-            res.status(401).json(error.message);
+            return res.status(404).json(error.toString());
         }
     },
     deleteUser: async (req,res) => {
@@ -21,7 +21,7 @@ module.exports.usersController = {
             const deleteUser = await User.findByIdAndRemove(req.params.id)
             res.json(deleteUser)
         } catch (error) {
-            res.json(error.message);
+            return res.status(404).json(error.toString());
         }
     },
     getUsers:async(req,res) => {
@@ -29,7 +29,15 @@ module.exports.usersController = {
             const getUsers = await User.find()
             res.json(getUsers)
         } catch (error) {
-            res.json(error.message);
+            return res.status(404).json(error.toString());
+        }
+    },
+    getOneUser:async(req,res)=> {
+        try {
+            const data = await User.findById(req.params.id)
+            res.json(data)
+        } catch (error) {
+            return res.status(404).json(error.toString());
         }
     }
 }

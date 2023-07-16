@@ -5,9 +5,20 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const basketRouter = require("./routes/basket.route");
+const favoriteRouter = require("./routes/favorite.route");
+const productRouter = require("./routes/product.route");
+
 app.use(cors());
-app.use(require("./routes/users.route"));
-app.use(require("./routes/categories.route"));
+app.use(express.json());
+
+app.use(require("./routes/user.route"));
+app.use(require("./routes/category.route"));
+app.use(require("./routes/globalCategory.route"));
+
+app.use("/basket", basketRouter);
+app.use("/favorite", favoriteRouter);
+app.use("/product", productRouter);
 
 mongoose
   .connect(process.env.MONGO_SERVER)
