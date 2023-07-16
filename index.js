@@ -8,14 +8,16 @@ const app = express();
 const basketRouter = require("./routes/basket.route");
 const favoriteRouter = require("./routes/favorite.route");
 const productRouter = require("./routes/product.route");
+const usersRouter = require("./routes/users.route");
+const categoriesRouter = require("./routes/categories.route");
+const globalCategories = require("./routes/globalCategories.route");
 
 app.use(cors());
 app.use(express.json());
-
-app.use(require("./routes/user.route"));
-app.use(require("./routes/category.route"));
-app.use(require("./routes/globalCategory.route"));
-
+app.use('/', usersRouter)
+app.use("/signUp", usersRouter);
+app.use("/categories", categoriesRouter);
+app.use("/globalCategories", globalCategories);
 app.use("/basket", basketRouter);
 app.use("/favorite", favoriteRouter);
 app.use("/product", productRouter);

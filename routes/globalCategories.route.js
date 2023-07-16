@@ -4,8 +4,8 @@ const { globalCategoriesController } = require('../controllers/globalCategory.co
 const router = Router()
 
 router.get('/globalCategories', globalCategoriesController.getGlobalCategories)
-router.get('/globalCategories/:id', globalCategoriesController.getOneGlobalCategory)
-router.post('/globalCategories', globalCategoriesController.createGlobalCategory)
-router.delete('/globalCategories', globalCategoriesController.deleteGlobalCategory)
+router.get('/globalCategories/:id', globalCategoriesController.getOneGlobalCategories)
+router.post('/globalCategories', globalCategoriesController.createGlobalCategories)
+router.delete('/globalCategories', globalCategoriesController.deleteGlobalCategories)
 
 module.exports = router

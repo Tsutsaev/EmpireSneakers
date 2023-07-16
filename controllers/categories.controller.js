@@ -1,10 +1,10 @@
 const { json } = require("express");
-const Category = require("../models/Category");
+const Categories = require("../models/Categories.model");
 
 module.exports.categoriesController = {
-  createCategory: async (req, res) => {
+  createCategories: async (req, res) => {
     try {
-      const data = await Category.create({
+      const data = await Categories.create({
         name: req.body.name,
         photo: req.body.photo,
       });
@@ -13,9 +13,9 @@ module.exports.categoriesController = {
       res.status(401).json(error.message);
     }
   },
-  getOneCategory: async (req, res) => {
+  getOneCategories: async (req, res) => {
     try {
-      const data = await Category.findById(req.params.id);
+      const data = await Categories.findById(req.params.id);
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -23,15 +23,15 @@ module.exports.categoriesController = {
   },
   getCategories: async (req, res) => {
     try {
-      const data = await Category.find();
+      const data = await Categories.find();
       res, json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
     }
   },
-  deleteCategory: async (req, res) => {
+  deleteCategories: async (req, res) => {
     try {
-      const data = await Category.findByIdAndDelete(req.params.id);
+      const data = await Categories.findByIdAndDelete(req.params.id);
       res, json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
