@@ -22,7 +22,7 @@ module.exports.productController = {
   },
   createProduct: async (req, res) => {
     try {
-      const { name, photo, title, materials, price, categories, sizes } =
+      const { name, photo, title, materials, price, categories, sizes, articul } =
         req.body;
 
       const product = await Product.create({
@@ -33,6 +33,7 @@ module.exports.productController = {
         price,
         categories,
         sizes,
+        articul
       });
 
       const data = await product.populate("categories");

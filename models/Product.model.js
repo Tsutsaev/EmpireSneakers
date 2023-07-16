@@ -9,12 +9,7 @@ const ProductSchema = mongoose.Schema({
   ],
   title: { type: String, required: true },
   materials: String,
-  articul: {
-    type: String,
-    required: true,
-    default: () => nanoid(7),
-    index: { unique: true },
-  },
+  articul: { type: Number },
   price: { type: Number, required: true, default: 0 },
   raiting: { type: Number, default: 0 },
   categories: [
@@ -25,8 +20,7 @@ const ProductSchema = mongoose.Schema({
   ],
   comments: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Comments",
+      type: String,
     },
   ],
   sizes: [
