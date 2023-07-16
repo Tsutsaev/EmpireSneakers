@@ -1,4 +1,3 @@
-const { json } = require("express");
 const Categories = require("../models/Categories.model");
 
 module.exports.categoriesController = {
@@ -7,15 +6,19 @@ module.exports.categoriesController = {
       const data = await Categories.create({
         name: req.body.name,
         photo: req.body.photo,
+        globalCategories: req.body.globalCategories,
       });
-      res.json(data);
+      const result = await data.populate("globalCategories");
+      res.json(result);
     } catch (error) {
       res.status(401).json(error.message);
     }
   },
   getOneCategories: async (req, res) => {
     try {
-      const data = await Categories.findById(req.params.id);
+      const data = await Categories.findById(req.params.id).populate(
+        "globalCategories"
+      );
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -23,16 +26,18 @@ module.exports.categoriesController = {
   },
   getCategories: async (req, res) => {
     try {
-      const data = await Categories.find();
-      res, json(data);
+      const data = await Categories.find().populate("globalCategories");
+      res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
     }
   },
   deleteCategories: async (req, res) => {
     try {
-      const data = await Categories.findByIdAndDelete(req.params.id);
-      res, json(data);
+      const data = await Categories.findByIdAndDelete(req.params.id, {
+        new: true,
+      });
+      res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
     }
