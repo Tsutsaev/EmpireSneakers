@@ -14,7 +14,7 @@ const globalCategories = require("./routes/globalCategories.route");
 
 app.use(cors());
 app.use(express.json());
-app.use("/user", usersRouter);
+app.use("/users", usersRouter);
 app.use("/categories", categoriesRouter);
 app.use("/globalCategories", globalCategories);
 app.use("/basket", basketRouter);
