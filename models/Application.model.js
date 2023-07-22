@@ -5,10 +5,7 @@ const applicationSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },
-  products: [
-   { type: mongoose.SchemaTypes.ObjectId,
-    ref: "Product"}
-  ],
+  products: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Product" } ],
   totalAmount: Number,
   shippingAdress: {
     adress: String,
