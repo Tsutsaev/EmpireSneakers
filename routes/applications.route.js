@@ -5,7 +5,7 @@ const { applicationsController } = require("../controllers/applications.controll
 router.get('/', applicationsController.getApplications);
 router.post('/', applicationsController.createApplication);
 router.patch('/:id', applicationsController.updateApplications);
-router.delete('/:is', applicationsController.deleteApplication);
+router.delete('/:id', applicationsController.deleteApplication);
 
 
 
