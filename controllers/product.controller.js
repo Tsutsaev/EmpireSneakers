@@ -3,9 +3,7 @@ const Product = require("../models/Product.model");
 module.exports.productController = {
   getOneProduct: async (req, res) => {
     try {
-      const data = await Product.findById(req.params.id).populate(
-        "comments categories"
-      );
+      const data = await Product.findById(req.params.id).populate("categories");
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -13,7 +11,7 @@ module.exports.productController = {
   },
   getProducts: async (req, res) => {
     try {
-      const data = await Product.find().populate("comments categories");
+      const data = await Product.find().populate("categories");
 
       res.json(data);
     } catch (error) {
@@ -22,8 +20,16 @@ module.exports.productController = {
   },
   createProduct: async (req, res) => {
     try {
-      const { name, photo, title, materials, price, categories, sizes, articul } =
-        req.body;
+      const {
+        name,
+        photo,
+        title,
+        materials,
+        price,
+        categories,
+        sizes,
+        articul,
+      } = req.body;
 
       const product = await Product.create({
         name,
@@ -33,7 +39,7 @@ module.exports.productController = {
         price,
         categories,
         sizes,
-        articul
+        articul,
       });
 
       const data = await product.populate("categories");
@@ -57,10 +63,10 @@ module.exports.productController = {
           price,
           categories,
           sizes,
-          articul
+          articul,
         },
         { new: true }
-      ).populate("categories comments");
+      ).populate("categories");
 
       res.json(data);
     } catch (error) {
