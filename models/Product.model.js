@@ -18,6 +18,10 @@ const ProductSchema = mongoose.Schema({
       ref: "Categories",
     },
   ],
+  globalCategory: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "GlobalCategories",
+  },
   comments: [
     {
       type: String,
