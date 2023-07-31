@@ -8,17 +8,14 @@ module.exports.categoriesController = {
         photo: req.body.photo,
         globalCategories: req.body.globalCategories,
       });
-      const result = await data.populate("globalCategories");
-      res.json(result);
+      res.json(data);
     } catch (error) {
       res.status(401).json(error.message);
     }
   },
   getOneCategories: async (req, res) => {
     try {
-      const data = await Categories.findById(req.params.id).populate(
-        "globalCategories"
-      );
+      const data = await Categories.findById(req.params.id);
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -26,7 +23,7 @@ module.exports.categoriesController = {
   },
   getCategories: async (req, res) => {
     try {
-      const data = await Categories.find().populate("globalCategories");
+      const data = await Categories.find();
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
