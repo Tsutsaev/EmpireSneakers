@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const app = express();
-app.use('/images',express.static('images'))
-
+app.use("/images", express.static("images"));
 
 const basketRouter = require("./routes/basket.route");
 const favoriteRouter = require("./routes/favorite.route");
@@ -13,10 +12,8 @@ const productRouter = require("./routes/product.route");
 const usersRouter = require("./routes/users.route");
 const categoriesRouter = require("./routes/categories.route");
 const globalCategories = require("./routes/globalCategories.route");
-const applicationsRouter = require('./routes/applications.route');
-const topicalRouter = require('./routes/topical.route')
-
-
+const applicationsRouter = require("./routes/applications.route");
+const topicalRouter = require("./routes/topical.route");
 
 app.use(cors());
 app.use(express.json());
@@ -26,8 +23,8 @@ app.use("/globalCategories", globalCategories);
 app.use("/basket", basketRouter);
 app.use("/favorite", favoriteRouter);
 app.use("/product", productRouter);
-app.use("/applications",applicationsRouter)
-app.use("/topicalImage", topicalRouter)
+app.use("/applications", applicationsRouter);
+app.use("/topicalImage", topicalRouter);
 
 mongoose
   .connect(process.env.MONGO_SERVER)
@@ -37,7 +34,3 @@ mongoose
 app.listen(process.env.PORT, () => {
   console.log("Server start on port: " + process.env.PORT);
 });
-
-
-
-

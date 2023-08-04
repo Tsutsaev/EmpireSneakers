@@ -18,7 +18,7 @@ module.exports.topicalController = {
           url: req.body.url,
         },
         { new: true }
-      )
+      );
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -26,12 +26,15 @@ module.exports.topicalController = {
   },
   updateTopical: async (req, res) => {
     try {
-      const data = await Topical.findByIdAndUpdate(req.params.id, {
-        img: req.files.map((item) => item.path),
-        url: req.body.url,
-      },
-      { new: true }).populate("url");
-      res.json(data)
+      const data = await Topical.findByIdAndUpdate(
+        req.params.id,
+        {
+          img: req.files.map((item) => item.path),
+          url: req.body.url,
+        },
+        { new: true }
+      ).populate("url");
+      res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
     }
@@ -43,5 +46,5 @@ module.exports.topicalController = {
     } catch (error) {
       return res.status(404).json(error.toString());
     }
-  }
+  },
 };
