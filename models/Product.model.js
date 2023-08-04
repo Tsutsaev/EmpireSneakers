@@ -11,7 +11,7 @@ const ProductSchema = mongoose.Schema({
   materials: String,
   articul: { type: Number },
   price: { type: Number, required: true, default: 0 },
-  raiting: { type: Number, default: 0 },
+  raiting: { type: Number, default: 0, min: 0, max: 5 },
   categories: [
     {
       type: mongoose.SchemaTypes.ObjectId,
@@ -22,11 +22,6 @@ const ProductSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "GlobalCategories",
   },
-  comments: [
-    {
-      type: String,
-    },
-  ],
   sizes: [
     {
       size: Number,

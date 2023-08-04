@@ -12,8 +12,10 @@ const productRouter = require("./routes/product.route");
 const usersRouter = require("./routes/users.route");
 const categoriesRouter = require("./routes/categories.route");
 const globalCategories = require("./routes/globalCategories.route");
-const applicationsRouter = require("./routes/applications.route");
 const topicalRouter = require("./routes/topical.route");
+const applicationsRouter = require('./routes/applications.route');
+const commentsRouter = require('./routes/comments.route');
+
 
 app.use(cors());
 app.use(express.json());
@@ -23,8 +25,11 @@ app.use("/globalCategories", globalCategories);
 app.use("/basket", basketRouter);
 app.use("/favorite", favoriteRouter);
 app.use("/product", productRouter);
-app.use("/applications", applicationsRouter);
+
 app.use("/topicalImage", topicalRouter);
+app.use("/applications",applicationsRouter)
+app.use("/comments", commentsRouter)
+
 
 mongoose
   .connect(process.env.MONGO_SERVER)
