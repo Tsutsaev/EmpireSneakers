@@ -24,7 +24,6 @@ module.exports.productController = {
     try {
       const {
         name,
-        photo,
         title,
         materials,
         price,
@@ -36,7 +35,7 @@ module.exports.productController = {
 
       const product = await Product.create({
         name,
-        photo,
+        photo: req.files.map((item) => item.path),
         title,
         materials,
         price,
