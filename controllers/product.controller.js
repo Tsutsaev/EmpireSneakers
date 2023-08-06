@@ -69,7 +69,7 @@ module.exports.productController = {
         req.params.id,
         {
           name,
-          photo,
+          photo: req.files.map((item) => item.path),
           title,
           materials,
           price,
