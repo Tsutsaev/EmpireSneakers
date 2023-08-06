@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports.usersController = {
   signUp: async (req, res) => {
-    const { name, email, login, password, admin } = req.body;
+    const { name, email, login, phone, password, admin } = req.body;
     try {
       const candidate = await User.findOne({ login: login });
 
@@ -13,14 +13,18 @@ module.exports.usersController = {
           .status(401)
           .json({ error: "Такой пользователь уже существует" });
       }
+
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
+
       const user = await User.create({
+        avatar: req.files[0].path,
         name,
         email,
         login,
+        phone,
         password: hash,
         admin,
       });
@@ -75,6 +79,15 @@ module.exports.usersController = {
     try {
       const data = await User.findById(req.params.id);
       res.json(data);
+    } catch (error) {
+      return res.status(404).json(error.toString());
+    }
+  },
+  updateAvatar: async (req, res) => {
+    try {
+      const data = await User.findByIdAndUpdate(req.params.id, {
+        avatar: req.files[0].path,
+      });
     } catch (error) {
       return res.status(404).json(error.toString());
     }
