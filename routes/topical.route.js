@@ -2,7 +2,6 @@ const Router = require("express");
 const { topicalController } = require("../controllers/topical.controller");
 const router = Router();
 const createMulter = require("../middleware/image.middleware");
-
 const uploadTopical = createMulter("topical");
 
 router.post("/", uploadTopical.array("img", 5), topicalController.addTopical);
