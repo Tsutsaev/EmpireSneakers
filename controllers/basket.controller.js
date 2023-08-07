@@ -1,19 +1,9 @@
 const Basket = require("../models/Basket.model");
 
 module.exports.basketController = {
-  createBasket: async (req, res) => {
-    try {
-      const data = await Basket.create({
-        user: req.params.id,
-      });
-      res.json(data);
-    } catch (error) {
-      return res.status(404).json(error.toString());
-    }
-  },
   getBasket: async (req, res) => {
     try {
-      const data = await Basket.findById(req.params.id).populate("products");
+      const data = await Basket.findById(req.params.id).populate("basket");
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -27,7 +17,7 @@ module.exports.basketController = {
           $addToSet: { basket: req.body.basket },
         },
         { new: true }
-      ).populate("products");
+      ).populate("basket");
 
       res.json(data);
     } catch (error) {
@@ -37,8 +27,8 @@ module.exports.basketController = {
   deleteInBasket: async (req, res) => {
     try {
       const data = await Basket.findByIdAndUpdate(req.params.id, {
-        $pull: { products: req.body.products },
-      }).populate("products");
+        $pull: { basket: req.body.basket },
+      }).populate("basket");
 
       res.json(data);
     } catch (error) {

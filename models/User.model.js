@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Favorite",
   },
+  basket: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "Basket",
+  },
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;
