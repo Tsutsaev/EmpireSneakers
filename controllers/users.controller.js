@@ -3,6 +3,7 @@ const Favorite = require("../models/Favorite.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const Basket = require("../models/Basket.model");
 
 module.exports.usersController = {
   signUp: async (req, res) => {
@@ -21,8 +22,9 @@ module.exports.usersController = {
         Number(process.env.BCRYPT_ROUNDS)
       );
 
-      const favorite = await new mongoose.Types.ObjectId();
-      const avatar = (await req.files[0]) ? req.files[0].path : "";
+      const favorite = new mongoose.Types.ObjectId();
+      const basket = new mongoose.Types.ObjectId();
+      const avatar = req.files && req.files[0] ? req.files[0].path : "";
       const user = await User.create({
         avatar: avatar,
         name,
@@ -32,10 +34,14 @@ module.exports.usersController = {
         password: hash,
         admin,
         favorite: favorite,
+        basket: basket,
       });
 
-      const userFavorite = await Favorite.create({
+      await Favorite.create({
         _id: favorite,
+      });
+      await Basket.create({
+        _id: basket,
       });
 
       res.json(user);
