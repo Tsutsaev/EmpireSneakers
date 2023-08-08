@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const BasketSchema = mongoose.Schema({
   basket: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Product",
+      product: { type: mongoose.SchemaTypes.ObjectId, ref: "Product" },
+      size: { type: Number, default: 0 },
     },
   ],
   size: String,
