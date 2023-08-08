@@ -49,7 +49,6 @@ module.exports.productController = {
 
       const data = await product
         .populate("categories globalCategory")
-        .execPopulate();
 
       res.json(data);
     } catch (error) {
