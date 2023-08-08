@@ -7,6 +7,7 @@ const BasketSchema = mongoose.Schema({
       ref: "Product",
     },
   ],
+  size: String,
 });
 
 const Basket = mongoose.model("Basket", BasketSchema);

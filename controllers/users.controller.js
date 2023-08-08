@@ -24,6 +24,7 @@ module.exports.usersController = {
 
       const favorite = new mongoose.Types.ObjectId();
       const basket = new mongoose.Types.ObjectId();
+      
       const avatar = req.files && req.files[0] ? req.files[0].path : "";
       const user = await User.create({
         avatar: avatar,

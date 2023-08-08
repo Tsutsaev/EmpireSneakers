@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const FavoriteSchema = mongoose.Schema({
   favorite: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Product",
+      product: { type: mongoose.SchemaTypes.ObjectId, ref: "Product" },
+      size: { type: Number, default: 0 },
     },
   ],
 });

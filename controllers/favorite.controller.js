@@ -3,7 +3,10 @@ const Favorite = require("../models/Favorite.model");
 module.exports.favoriteController = {
   getFavorite: async (req, res) => {
     try {
-      const data = await Favorite.findById(req.params.id).populate("favorite");
+      const data = await Favorite.findById(req.params.id).populate(
+        "favorite.product"
+      );
+      
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -11,17 +14,20 @@ module.exports.favoriteController = {
   },
   addToFavorite: async (req, res) => {
     try {
+      const favoriteId = req.params.id;
+      const { product, size } = req.body;
+
       const data = await Favorite.findByIdAndUpdate(
-        req.params.id,
+        favoriteId,
         {
-          $addToSet: { favorite: req.body.favorite },
+          $addToSet: { favorite: { product, size } },
         },
         { new: true }
-      ).populate("favorite");
+      ).populate("favorite.product");
 
       res.json(data);
     } catch (error) {
-      return res.status(404).json(error.toString());
+      return res.status(400).json({ error: error.toString() });
     }
   },
   deleteInFavorite: async (req, res) => {

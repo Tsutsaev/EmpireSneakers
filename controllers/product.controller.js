@@ -33,9 +33,11 @@ module.exports.productController = {
         articul,
       } = req.body;
 
+      const photo = req.files && req.files[0] ? req.files[0].path : "";
+
       const product = await Product.create({
         name,
-        photo: req.files.map((item) => item.path),
+        photo: photo,
         title,
         materials,
         price,
@@ -45,7 +47,9 @@ module.exports.productController = {
         articul,
       });
 
-      const data = await product.populate("categories globalCategory");
+      const data = await product
+        .populate("categories globalCategory")
+        .execPopulate();
 
       res.json(data);
     } catch (error) {
@@ -55,7 +59,6 @@ module.exports.productController = {
   updateProduct: async (req, res) => {
     const {
       name,
-      photo,
       title,
       materials,
       price,
@@ -65,11 +68,13 @@ module.exports.productController = {
       articul,
     } = req.body;
     try {
+      const photo = req.files && req.files[0] ? req.files[0].path : "";
+
       const data = await Product.findByIdAndUpdate(
         req.params.id,
         {
           name,
-          photo: req.files.map((item) => item.path),
+          photo: photo,
           title,
           materials,
           price,
