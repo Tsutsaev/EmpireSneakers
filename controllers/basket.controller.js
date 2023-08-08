@@ -3,7 +3,9 @@ const Basket = require("../models/Basket.model");
 module.exports.basketController = {
   getBasket: async (req, res) => {
     try {
-      const data = await Basket.findById(req.params.id).populate("basket");
+      const data = await Basket.findById(req.params.id).populate(
+        "basket.product"
+      );
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -11,13 +13,16 @@ module.exports.basketController = {
   },
   addToBasket: async (req, res) => {
     try {
+      const basketId = req.params.id;
+      const { product, size } = req.body;
+
       const data = await Basket.findByIdAndUpdate(
-        req.params.id,
+        basketId,
         {
-          $addToSet: { basket: req.body.basket },
+          $addToSet: { basket: { product, size } },
         },
         { new: true }
-      ).populate("basket");
+      ).populate("basket.product");
 
       res.json(data);
     } catch (error) {
@@ -26,9 +31,12 @@ module.exports.basketController = {
   },
   deleteInBasket: async (req, res) => {
     try {
-      const data = await Basket.findByIdAndUpdate(req.params.id, {
-        $pull: { basket: req.body.basket },
-      }).populate("basket");
+      const basketId = req.params.id;
+      const { product, size } = req.body;
+
+      const data = await Basket.findByIdAndUpdate(basketId, {
+        $pull: { basket: { product, size } },
+      }).populate("basket.product");
 
       res.json(data);
     } catch (error) {

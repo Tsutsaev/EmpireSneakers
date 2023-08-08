@@ -6,7 +6,7 @@ module.exports.favoriteController = {
       const data = await Favorite.findById(req.params.id).populate(
         "favorite.product"
       );
-      
+
       res.json(data);
     } catch (error) {
       return res.status(404).json(error.toString());
@@ -31,14 +31,17 @@ module.exports.favoriteController = {
     }
   },
   deleteInFavorite: async (req, res) => {
+    const favoriteId = req.params.id;
+    const { product, size } = req.body;
+
     try {
       const data = await Favorite.findByIdAndUpdate(
-        req.params.id,
+        favoriteId,
         {
-          $pull: { favorite: req.body.favorite },
+          $pull: { favorite: { product, size } },
         },
         { new: true }
-      ).populate("favorite");
+      ).populate("favorite.product");
 
       res.json(data);
     } catch (error) {
