@@ -13,7 +13,7 @@ const usersRouter = require("./routes/users.route");
 const categoriesRouter = require("./routes/categories.route");
 const globalCategories = require("./routes/globalCategories.route");
 const topicalRouter = require("./routes/topical.route");
-const applicationsRouter = require("./routes/applications.route");
+const requestsRouter = require("./routes/requests.route");
 const commentsRouter = require("./routes/comments.route");
 
 app.use(cors());
@@ -26,7 +26,7 @@ app.use("/favorite", favoriteRouter);
 app.use("/product", productRouter);
 
 app.use("/topicalImage", topicalRouter);
-app.use("/applications", applicationsRouter);
+app.use("/requests", requestsRouter);
 app.use("/comments", commentsRouter);
 
 mongoose

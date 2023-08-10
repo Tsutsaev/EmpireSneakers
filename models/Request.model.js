@@ -1,14 +1,11 @@
 const mongoose = require("mongoose");
 
-const applicationSchema = mongoose.Schema({
+const RequestSchema = mongoose.Schema({
   user: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "User",
   },
-  products: [
-   { type: mongoose.SchemaTypes.ObjectId,
-    ref: "Product"}
-  ],
+  products: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Product" }],
   totalAmount: Number,
   shippingAdress: {
     adress: String,
@@ -20,5 +17,6 @@ const applicationSchema = mongoose.Schema({
   createdAt: { type: Date, default: Date.now() },
 });
 
-const Application = mongoose.model("Application", applicationSchema);
-module.exports = Application;
+const Request = mongoose.model("Request", RequestSchema);
+
+module.exports = Request;
