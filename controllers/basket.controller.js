@@ -38,7 +38,7 @@ module.exports.basketController = {
         $pull: { basket: { product, size } },
       }).populate("basket.product");
 
-      res.json(data);
+      res.json(product);
     } catch (error) {
       return res.status(404).json(error.toString());
     }
