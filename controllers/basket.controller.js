@@ -34,7 +34,7 @@ module.exports.basketController = {
       const basketId = req.params.id;
       const { product, size } = req.body;
 
-      const data = await Basket.findByIdAndUpdate(basketId, {
+      await Basket.findByIdAndUpdate(basketId, {
         $pull: { basket: { product, size } },
       }).populate("basket.product");
 
