@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/:id", basketController.getBasket);
 router.patch("/add/:id", basketController.addToBasket);
-router.delete("/delete/:id", basketController.deleteInBasket);
+router.patch("/delete/:id", basketController.deleteInBasket);
 
 module.exports = router;
