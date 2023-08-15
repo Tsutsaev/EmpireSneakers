@@ -43,16 +43,19 @@ module.exports.productController = {
         price,
         categories,
         globalCategory,
-        sizes,
+        sizes:
+          sizes.map((item) => ({
+            size: item.size,
+            quantity: item.quantity,
+          })) || "",
         articul,
       });
 
-      const data = await product
-        .populate("categories globalCategory")
+      const data = await product.populate("categories globalCategory");
 
       res.json(data);
     } catch (error) {
-      return res.status(404).json(error.toString());
+      return res.status(400).json({ error: error.toString() });
     }
   },
   updateProduct: async (req, res) => {
