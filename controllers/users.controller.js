@@ -86,7 +86,7 @@ module.exports.usersController = {
       await User.deleteOne({ _id: req.params.id });
 
       res.json(req.params.id);
-    } catch (error) {
+      } catch (error) {
       return res.status(404).json(error.toString());
     }
   },
