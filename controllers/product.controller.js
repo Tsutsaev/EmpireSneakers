@@ -31,6 +31,7 @@ module.exports.productController = {
         globalCategory,
         sizes,
         articul,
+        rating
       } = req.body;
 
       const photo = req.files && req.files[0] ? req.files[0].path : "";
@@ -45,6 +46,7 @@ module.exports.productController = {
         globalCategory,
         sizes,
         articul,
+        rating
       });
 
       const data = await product
