@@ -46,6 +46,7 @@ module.exports.productController = {
         }
       }
       //console.log(JSON.parse(categories));
+      console.log(Array.isArray( JSON.parse(sizes)));
       
       
       const product = await Product.create({
@@ -56,7 +57,7 @@ module.exports.productController = {
         price,
         categories: JSON.parse(categories),
         globalCategory,
-        sizes,
+        sizes:JSON.parse(sizes),
         rating,
         articul,
       });
