@@ -43,7 +43,7 @@ module.exports.favoriteController = {
         { new: true }
       ).populate("favorite.product");
 
-      res.json(data);
+      res.json(product);
     } catch (error) {
       return res.status(404).json(error.toString());
     }

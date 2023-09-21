@@ -6,8 +6,7 @@ const BasketSchema = mongoose.Schema({
       product: { type: mongoose.SchemaTypes.ObjectId, ref: "Product" },
       size: { type: Number, default: 0 },
     },
-  ],
-  size: String,
+  ]
 });
 
 const Basket = mongoose.model("Basket", BasketSchema);

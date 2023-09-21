@@ -66,9 +66,10 @@ module.exports.productController = {
       const data = await product
         .populate("categories globalCategory")
 
+
       res.json(data);
     } catch (error) {
-      return res.status(404).json(error.toString());
+      return res.status(400).json({ error: error.toString() });
     }
   },
   updateProduct: async (req, res) => {

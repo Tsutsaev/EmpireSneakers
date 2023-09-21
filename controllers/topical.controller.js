@@ -3,7 +3,7 @@ const Topical = require("../models/Topical.model");
 module.exports.topicalController = {
   getTopical: async (req, res) => {
     try {
-      const data = await Topical.find();
+      const data = await Topical.findById(req.params.id);
 
       res.json(data);
     } catch (error) {
