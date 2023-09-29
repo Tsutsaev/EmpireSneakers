@@ -34,7 +34,7 @@ module.exports.productController = {
         articul,
       } = req.body;
 
-      
+      console.log(sizes);
       //const photo = req.files && req.files[0] ? req.files[0].path : "";
       
       const photo = [];
@@ -46,7 +46,7 @@ module.exports.productController = {
         }
       }
       //console.log(JSON.parse(categories));
-      console.log(Array.isArray( JSON.parse(sizes)));
+      //console.log(Array.isArray( JSON.parse(sizes)));
       
       
       const product = await Product.create({
