@@ -4,6 +4,6 @@ const router = Router();
 
 router.get("/:id", favoriteController.getFavorite);
 router.patch("/add/:id", favoriteController.addToFavorite);
-router.delete("/delete/:id", favoriteController.deleteInFavorite);
+router.patch("/delete/:id", favoriteController.deleteInFavorite);
 
 module.exports = router;

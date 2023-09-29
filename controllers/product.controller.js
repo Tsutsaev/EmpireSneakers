@@ -33,9 +33,6 @@ module.exports.productController = {
         sizes,
         articul,
       } = req.body;
-
-      
-      //const photo = req.files && req.files[0] ? req.files[0].path : "";
       
       const photo = [];
       
@@ -45,8 +42,6 @@ module.exports.productController = {
           photo.push(photoPath);
         }
       }
-      //console.log(JSON.parse(categories));
-      
       
       const product = await Product.create({
         name,
@@ -61,13 +56,12 @@ module.exports.productController = {
         articul,
       });
       
-      
       const data = await product
         .populate("categories globalCategory")
 
       res.json(data);
     } catch (error) {
-      return res.status(404).json(error.toString());
+      return res.status(400).json({ error: error.toString() });
     }
   },
   updateProduct: async (req, res) => {

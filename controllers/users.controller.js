@@ -24,7 +24,7 @@ module.exports.usersController = {
 
       const favorite = new mongoose.Types.ObjectId();
       const basket = new mongoose.Types.ObjectId();
-      
+
       const avatar = req.files && req.files[0] ? req.files[0].path : "";
       const user = await User.create({
         avatar: avatar,
@@ -78,9 +78,15 @@ module.exports.usersController = {
   },
   deleteUser: async (req, res) => {
     try {
-      const deleteUser = await User.findByIdAndRemove(req.params.id);
-      res.json(deleteUser);
-    } catch (error) {
+      const user = await User.findById(req.params.id);
+
+      await Basket.findByIdAndRemove(user.basket);
+      await Favorite.findByIdAndRemove(user.favorite);
+
+      await User.deleteOne({ _id: req.params.id });
+
+      res.json(req.params.id);
+      } catch (error) {
       return res.status(404).json(error.toString());
     }
   },

@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
 const topicalSchema = mongoose.Schema({
-  img: [String],
-  url: [
+  slides: [
     {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "Product",
+      img: String,
+      url: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Product",
+      },
     },
   ],
 });

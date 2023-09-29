@@ -24,6 +24,7 @@ app.use("/globalCategories", globalCategories);
 app.use("/basket", basketRouter);
 app.use("/favorite", favoriteRouter);
 app.use("/product", productRouter);
+app.use("/topical", topicalRouter)
 
 app.use("/topicalImage", topicalRouter);
 app.use("/requests", requestsRouter);
