@@ -23,7 +23,7 @@ const ProductSchema = mongoose.Schema({
     ref: "GlobalCategories",
   },
   sizes: [
-    {
+    { type: mongoose.SchemaTypes.Mixed,
       size: Number,
       quantity: Number,
     },
